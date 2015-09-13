@@ -91,6 +91,7 @@ int valid(int a[2], int b[2], int c[4])
 		{
 			return 0;
 		}
+<<<<<<< HEAD
 
 	}
 	if (u <= 7)
@@ -150,6 +151,67 @@ int valid(int a[2], int b[2], int c[4])
 		}
 	}
 
+=======
+
+	}
+	if (u <= 7)
+	{
+		if (u % 2 == 0 && t <= 30)
+		{
+			if ((v % 4 == 0 && v % 100 != 0) || v % 400 == 0)
+			{
+				if (u == 2 && t <= 29)
+				{
+					return 1;
+				}
+				else if (u == 2 && t > 29)
+				{
+					return 0;
+				}
+
+
+				return 1;
+
+			}
+			else
+			{
+				if (u == 2 && t <= 28)
+				{
+					return 1;
+				}
+				else if (u == 2 && t>28)
+				{
+					return 0;
+				}
+				else
+				{
+					return 1;
+				}
+			}
+
+		}
+		else if (u % 2 == 1 && t <= 31)
+		{
+			return 1;
+		}
+	}
+	else
+	{
+		if (u % 2 == 1 && t <= 30)
+		{
+			return 1;
+		}
+		else if (u % 2 == 0 && t <= 31)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+>>>>>>> origin/master
 
 }
 int day(int a[10], int j)

@@ -17,7 +17,7 @@ void main()
 }
 int date(char d[50])
 {
-	int i,j=0,count=0,k=0,l=0;
+	int i, j = 0, count = 0, k = 0, l = 0;
 	int a[10];
 	int b[10];
 	int c[10];
@@ -30,46 +30,137 @@ int date(char d[50])
 		}
 		if (count == 0)
 		{
-			a[j] =(int) d[i]-48;//here 49 kadhu 48 ye crct vasthundhi raa
+			a[j] = (int)d[i] - 48;
 			j++;
 		}
-		else if (count==1)
+		else if (count == 1)
 		{
-			b[k] =(int) d[i]-48;
+			b[k] = (int)d[i] - 48;
 			k++;
 		}
 		else if (count == 2)
 		{
-			c[l] = (int)d[i]-48;
+			c[l] = (int)d[i] - 48;
 			l++;
 		}
 	}
-	day(a,j-1);
-	printf("-");
-	mon(b);
-	printf("-");
-	if (l < 5)
+	if (valid(a, b, c))
 	{
-		year(c, l - 1);
+		day(a, j - 1);
+		printf(" - ");
+		mon(b);
+		printf(" - ");
+		if (l < 5)
+		{
+			year(c, l - 1);
+		}
+		else
+		{
+			printf("year formate is YYYY");
+		}
 	}
 	else
 	{
-		printf("year formate is YYYY");
+		printf(" NOT VALID ");
 	}
 }
-int day(int a[10],int j)
+int valid(int a[2], int b[2], int c[4])
 {
-	int t,o;
-	int i=0,c=0;
+	int i = 0, j = 0, k = 0, t = 0, u = 0, v = 0;
+	for (k = 0; k < 4; k++)
+	{
+		if (c[k] >= 0 && c[k] <= 9)
+		{
+			if (k < 2)
+			{
+				if (a[k] >= 0 && a[k] <= 9 && b[k] >= 0 && b[k] <= 9)
+				{
+					t = (t * 10) + a[k];
+					u = (u * 10) + b[k];
+				}
+				else
+				{
+					return 0;
+				}
+			}
 
+			v = (v * 10) + c[k];
+
+		}
+		else
+		{
+			return 0;
+		}
+
+	}
+	if (u <= 7)
+	{
+		if (u % 2 == 0 && t <= 30)
+		{
+			if ((v % 4 == 0 && v % 100 != 0) || v % 400 == 0)
+			{
+				if (u == 2 && t <= 29)
+				{
+					return 1;
+				}
+				else if (u == 2 && t > 29)
+				{
+					return 0;
+				}
+
+
+				return 1;
+
+			}
+			else
+			{
+				if (u == 2 && t <= 28)
+				{
+					return 1;
+				}
+				else if (u == 2 && t>28)
+				{
+					return 0;
+				}
+				else
+				{
+					return 1;
+				}
+			}
+
+		}
+		else if (u % 2 == 1 && t <= 31)
+		{
+			return 1;
+		}
+	}
+	else
+	{
+		if (u % 2 == 1 && t <= 30)
+		{
+			return 1;
+		}
+		else if (u % 2 == 0 && t <= 31)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+
+}
+int day(int a[10], int j)
+{
+	int t, o;
+	int i = 0, c = 0;
 	t = a[i];
 	o = a[i + 1];
 	t = (t * 10) + o;
-	
-
-	for (i = 0; i<=j; i++)
+	for (i = 0; i <= j; i++)
 	{
-		//printf("%d ", a[i]);
 		if (t > 32)
 		{
 			printf(" invalid date");
@@ -81,33 +172,28 @@ int day(int a[10],int j)
 			t = a[i];
 			onces(t);
 		}
-		
+
 		if (a[i] == 2 && c <= i || a[i] == 3 && c <= i)
 		{
 			t = a[i];
 			tens(t);
-			c=c+2;
+			c = c + 2;
 		}
-		else if (a[i] == 1 && c<= i)
-		{ 
-			/*t = a[i];
-			o = a[i + 1];
-			t = (t * 10) + o;*/
-			
+		else if (a[i] == 1 && c <= i)
+		{
 			ten(t);
 			c = c + 3;
-
 		}
 		else if (a[i] == 0 && c <= i)
 		{
 			c = c + 2;
 		}
-		
+
 	}
 }
 int mon(int b[10])
 {
-	int t, o,i=0;
+	int t, o, i = 0;
 	t = b[i];
 	o = b[i + 1];
 	t = (t * 10) + o;
@@ -120,21 +206,21 @@ int mon(int b[10])
 	{
 		for (i = t * 4; i < t * 4 + 3; i++)
 		{
-			if (a[i]!=' ')
+			if (a[i] != ' ')
 			{
 				printf("%c", a[i]);
 			}
 		}
 	}
 	//printf("\n %d",t);
-	
+
 }
-int year(int c[10],int l)
+int year(int c[10], int l)
 {
-	int i,j,e=0,t,o;
+	int i, j, e = 0, t, o;
 	j = l;
 
-	for (i = 0; i<=l; i++)
+	for (i = 0; i <= l; i++)
 	{
 		if (j == 3)
 		{
@@ -143,7 +229,7 @@ int year(int c[10],int l)
 				onces(c[i]);
 				printf("Thousand ");
 			}
-			
+
 			j--;
 			i++;
 		}
@@ -154,7 +240,7 @@ int year(int c[10],int l)
 				onces(c[i]);
 				printf("Hundred and ");
 			}
-			else if (c[i+2]!=0)
+			else if (c[i + 2] != 0)
 			{
 				printf("and ");
 			}
@@ -163,8 +249,8 @@ int year(int c[10],int l)
 		}
 		if (j == 1)
 		{
-		
-			if (c[i] >= 2 && e <= i )
+
+			if (c[i] >= 2 && e <= i)
 			{
 				tens(c[i]);
 				e = e + 2;
@@ -216,7 +302,7 @@ int tens(int t)
 		printf("Fifty ");
 		break;
 	case 6:
-		printf("Sixty "); 
+		printf("Sixty ");
 		break;
 	case 7:
 		printf("Seventy ");
